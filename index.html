@@ -16,13 +16,14 @@
     </style>
   </head>
   <body>
-    <ul>
-      <li></li>
+  <script src="knockout.js"></script>
+    <ul data-bind:"foreach:listObservable">
+      <li data-bind:"text:name"></li>
     </ul>
     <div id="map">
 
     </div>
-    <script src="knockout.js"></script>
+
     <script src="script.js"></script>
 
 
