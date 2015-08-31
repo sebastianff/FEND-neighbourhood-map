@@ -20,3 +20,10 @@ function initMap() {
 	  });
   }
 }
+
+var myViewModel = function(){
+	var listObservable = ko.observableArray();
+
+}
+
+ko.applyBindings(myViewModel);
