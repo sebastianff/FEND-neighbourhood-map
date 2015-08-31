@@ -22,8 +22,10 @@ function initMap() {
 }
 
 var myViewModel = function(){
-	var listObservable = ko.observableArray();
-
+	this.listObservable = ko.observableArray();
+	locations.forEach(function(locItem){
+		this.listObservable.push(locItem);
+	});
 }
 
 ko.applyBindings(myViewModel);
