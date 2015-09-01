@@ -7,7 +7,6 @@ var locations = [
 var map;
 
 var myViewModel = function(){
-	this.userInput = ko.observable("ne");
 	this.listObservable = ko.observableArray();
 
 	locations.forEach(function(locItem){
@@ -21,7 +20,8 @@ var myViewModel = function(){
 		});
 
 		for(items in listObservable()){
-			if (userInput().indexOf(listObservable()[items].name==0)){
+			var userText = document.getElementById('userInput').value;
+			if (listObservable()[items].name.indexOf(userText)==0){
 			  var marker = new google.maps.Marker({
 			   	map: map,
 			    draggable: true,
@@ -30,7 +30,6 @@ var myViewModel = function(){
 			  });
 
 		  	}
-		  	else{console.log("da")}
   		}
 	}
 }
