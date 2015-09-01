@@ -7,6 +7,7 @@ var locations = [
 var map;
 
 var myViewModel = function(){
+	this.userInput = ko.observable();
 	this.listObservable = ko.observableArray();
 
 	locations.forEach(function(locItem){
