@@ -7,7 +7,7 @@ var locations = [
 var map;
 
 var myViewModel = function(){
-	this.userInput = ko.observable();
+	this.userInput = ko.observable("ne");
 	this.listObservable = ko.observableArray();
 
 	locations.forEach(function(locItem){
@@ -20,13 +20,17 @@ var myViewModel = function(){
     		zoom: 4
 		});
 
-		for(items in locations){
-		  var marker = new google.maps.Marker({
-		   	map: map,
-		    draggable: true,
-		    animation: google.maps.Animation.DROP,
-		    position: listObservable()[items].coor[0]
-		  });
+		for(items in listObservable()){
+			if (userInput().indexOf(listObservable()[items].name==0)){
+			  var marker = new google.maps.Marker({
+			   	map: map,
+			    draggable: true,
+			    animation: google.maps.Animation.DROP,
+			    position: listObservable()[items].coor[0]
+			  });
+
+		  	}
+		  	else{console.log("da")}
   		}
 	}
 }
