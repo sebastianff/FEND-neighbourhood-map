@@ -24,7 +24,7 @@ var myViewModel = function(){
 		   	map: map,
 		    draggable: true,
 		    animation: google.maps.Animation.DROP,
-		    position: locations[items].coor[0]
+		    position: listObservable()[items].coor[0]
 		  });
   		}
 	}
