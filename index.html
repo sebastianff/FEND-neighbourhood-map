@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <input data-bind="value: userInput,event:{keypress:initMap}"></input>
+    <input id="userInput" data-bind="event:{click:initMap}"></input>
     <ul data-bind="foreach:listObservable">
       <li data-bind="text: name"></li>
     </ul>
