@@ -33,6 +33,13 @@ var myViewModel = function(){
 			    position: listObservable()[items].coor[0]
 			  });
   		}
+  		var nesto = '<iframe id="ytplayer" type="text/html" width="160" height="92.5"src="http://www.youtube.com/embed?listType=search&autoplay=1&list='+listObservable()[items].name+' national anthem"frameborder="0"/>';
+  		var infowindow = new google.maps.InfoWindow({
+  			content: nesto
+		});
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		});
 	}
 }
 
