@@ -7,11 +7,8 @@ var locations = [
 var map;
 
 var myViewModel = function(){
-	this.listObservable = ko.observableArray();
 
-	locations.forEach(function(locItem){
-		this.listObservable.push(locItem);
-	});
+	this.listObservable = ko.observableArray();
 
 	this.initMap = function(){
 		map = new google.maps.Map(document.getElementById('map'), {
@@ -19,17 +16,22 @@ var myViewModel = function(){
     		zoom: 4
 		});
 
+	this.listObservable.removeAll();
+
+	locations.forEach(function(locItem){
+		var userText = document.getElementById('userInput').value;
+			if (locItem.name.toLowerCase().indexOf(userText.toLowerCase())==0){
+				this.listObservable.push(locItem);
+			}
+	});
+
 		for(items in listObservable()){
-			var userText = document.getElementById('userInput').value;
-			if (listObservable()[items].name.indexOf(userText)==0){
 			  var marker = new google.maps.Marker({
 			   	map: map,
 			    draggable: true,
 			    animation: google.maps.Animation.DROP,
 			    position: listObservable()[items].coor[0]
 			  });
-
-		  	}
   		}
 	}
 }
