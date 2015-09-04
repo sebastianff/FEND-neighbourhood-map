@@ -25,9 +25,7 @@ var map;
 					this.listObservable.push(locItem);
 				}
 			});
-	}
 
-	createMarkers = function(){
 		for(items in listObservable()){
 			  var marker = new google.maps.Marker({
 			   	map: map,
@@ -49,8 +47,7 @@ var map;
 		});
 	}
 var myViewModel = function(){
+	this.nesto = fillLocations();
 	this.listObservable = ko.observableArray();
-	fillLocations();
-	createMarkers();
 }
 ko.applyBindings(myViewModel);

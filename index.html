@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <input id="userInput" data-bind="event:{keyup:initMap}"></input>
+    <input id="userInput" data-bind="event:{keyup:fillLocations}"></input>
     <ul data-bind="foreach:listObservable">
       <li data-bind="text: name"></li>
     </ul>
@@ -15,10 +15,11 @@
 
     </div>
     <script src="knockout.js"></script>
-    <script src="script.js"></script>
+
 
 
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
+        ></script>
+        <script src="script.js"></script>
   </body>
 </html>
