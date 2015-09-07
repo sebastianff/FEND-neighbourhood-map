@@ -25,8 +25,10 @@ var map;
 			infowindow.open(map, marker);
 		});
 	}
+
 var myViewModel = function(){
 
+	this.markers = ko.observableArray();
 	this.listObservable = ko.observableArray();
 
 	this.populateList = function(){
@@ -43,19 +45,41 @@ var myViewModel = function(){
 				if (locItem.name.toLowerCase().indexOf(userText.toLowerCase())==0){
 					this.listObservable.push(locItem);
 				}
-			});
+		});
 	}
 
-	this.addMarkers = function(){
-		for(items in listObservable()){
+	this.addMarkers = function(location){
 			  var marker = new google.maps.Marker({
-			   	map: map,
 			    draggable: true,
 			    animation: google.maps.Animation.DROP,
-			    position: listObservable()[items].coor[0]
+			    position: location
 			  });
-		}
+		markers().push(marker);
   	}
+
+  	this.createMarkers = function(){
+  		deleteMarkers();
+  		for (items in listObservable()){
+  			addMarkers(listObservable()[items].coor[0]);
+  			//console.log(listObservable()[items].coor);
+  		}
+  		showMarkers();
+  	}
+
+  	this.setMapOnAll = function(map){
+  		for (var i = 0; i < markers().length; i++) {
+    		markers()[i].setMap(map);
+  		}
+	}
+
+	this.showMarkers =  function(){
+		setMapOnAll(map)
+	}
+
+	this.deleteMarkers =  function(){
+		setMapOnAll(null);
+		markers.removeAll();
+	}
   	this.populateList();
 
 }
