@@ -17,8 +17,6 @@ var map;
 		});
 	}
 
-  	//var nesto = '<iframe id="ytplayer" type="text/html" width="160" height="92.5"src="http://www.youtube.com/embed?listType=search&autoplay=1&list='+listObservable()[items].name+' national anthem"frameborder="0"/>';
-
   	infoWin = function(){
   		var infowindow = new google.maps.InfoWindow({
   			content: nesto
@@ -28,7 +26,15 @@ var map;
 		});
 	}
 var myViewModel = function(){
+
 	this.listObservable = ko.observableArray();
+
+	this.populateList = function(){
+		locations.forEach(function(locItem){
+					this.listObservable.push(locItem);
+			});
+
+	}
 
 	this.filterLocations = function(){
 		listObservable.removeAll();
@@ -39,6 +45,7 @@ var myViewModel = function(){
 				}
 			});
 	}
+
 	this.addMarkers = function(){
 		for(items in listObservable()){
 			  var marker = new google.maps.Marker({
@@ -49,7 +56,7 @@ var myViewModel = function(){
 			  });
 		}
   	}
-  	filterLocations();
+  	this.populateList();
 
 }
 ko.applyBindings(myViewModel);
