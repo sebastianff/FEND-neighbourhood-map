@@ -4,7 +4,7 @@ var locations = [
 	{name:"United Kingdom",coor:[{lat:51.510795, lng:-0.105520}]},
 	{name:"Belgium",coor:[{lat:50.515523, lng:4.816355}]}
 ]
-
+var test = ["da","ne","mozda","hmm","da","sebo"]
 
 //
 var map;
@@ -17,14 +17,7 @@ var map;
 		});
 	}
 
-  	infoWin = function(){
-  		var infowindow = new google.maps.InfoWindow({
-  			content: nesto
-		});
-		marker.addListener('click', function() {
-			infowindow.open(map, marker);
-		});
-	}
+
 
 var myViewModel = function(){
 
@@ -37,6 +30,7 @@ var myViewModel = function(){
 			});
 
 	}
+
 
 	this.filterLocations = function(){
 		listObservable.removeAll();
@@ -64,12 +58,25 @@ var myViewModel = function(){
   			//console.log(listObservable()[items].coor);
   		}
   		showMarkers();
+  		setWinOnAll();
   	}
 
   	this.setMapOnAll = function(map){
   		for (var i = 0; i < markers().length; i++) {
     		markers()[i].setMap(map);
   		}
+	}
+
+	this.setWinOnAll = function(){
+  		for (var i = 0; i < markers().length; i++) {
+    			var infowindow = new google.maps.InfoWindow({
+    			content: test[i],
+   				 maxWidth: 200
+  				});
+  				markers()[i].addListener('click', function() {
+    				infowindow.open(map, markers()[i]);
+  					});
+  				}
 	}
 
 	this.showMarkers =  function(){
