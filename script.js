@@ -42,41 +42,29 @@ var myViewModel = function(){
 		});
 	}
 
-	this.addMarkers = function(location){
+	this.addMarkers = function(location,message){
 			  var marker = new google.maps.Marker({
 			    draggable: true,
 			    animation: google.maps.Animation.DROP,
 			    position: location
 			  });
+			  attachWin(marker,message);
 		markers().push(marker);
   	}
 
   	this.createMarkers = function(){
   		deleteMarkers();
   		for (items in listObservable()){
-  			addMarkers(listObservable()[items].coor[0]);
+  			addMarkers(listObservable()[items].coor[0],test[items]);
   			//console.log(listObservable()[items].coor);
   		}
   		showMarkers();
-  		setWinOnAll();
   	}
 
   	this.setMapOnAll = function(map){
   		for (var i = 0; i < markers().length; i++) {
     		markers()[i].setMap(map);
   		}
-	}
-
-	this.setWinOnAll = function(){
-  		for (var i = 0; i < markers().length; i++) {
-    			var infowindow = new google.maps.InfoWindow({
-    			content: test[i],
-   				 maxWidth: 200
-  				});
-  				markers()[i].addListener('click', function() {
-    				infowindow.open(map, markers()[i]);
-  					});
-  				}
 	}
 
 	this.showMarkers =  function(){
@@ -86,6 +74,21 @@ var myViewModel = function(){
 	this.deleteMarkers =  function(){
 		setMapOnAll(null);
 		markers.removeAll();
+	}
+
+	this.attachWin = function(marker,message){
+		var infowindow = new google.maps.InfoWindow({
+    		content:message
+  		});
+
+  		marker.addListener('click', function() {
+  			infowindow.close();
+    		infowindow.open(marker.get('map'), marker);
+  		});
+	}
+
+	this.getInfo = function(){
+		infowindow.open(map, markers()[i]);
 	}
   	this.populateList();
 
