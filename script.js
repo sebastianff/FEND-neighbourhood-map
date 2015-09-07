@@ -17,25 +17,6 @@ var map;
 		});
 	}
 
-
-	fillLocations = function(){
-		locations.forEach(function(locItem){
-			var userText = document.getElementById('userInput').value;
-				if (locItem.name.toLowerCase().indexOf(userText.toLowerCase())==0){
-					this.listObservable.push(locItem);
-				}
-			});
-
-		for(items in listObservable()){
-			  var marker = new google.maps.Marker({
-			   	map: map,
-			    draggable: true,
-			    //animation: google.maps.Animation.DROP,
-			    position: listObservable()[items].coor[0]
-			  });
-  		}
-  	}
-
   	//var nesto = '<iframe id="ytplayer" type="text/html" width="160" height="92.5"src="http://www.youtube.com/embed?listType=search&autoplay=1&list='+listObservable()[items].name+' national anthem"frameborder="0"/>';
 
   	infoWin = function(){
@@ -47,7 +28,28 @@ var map;
 		});
 	}
 var myViewModel = function(){
-	this.nesto = fillLocations();
 	this.listObservable = ko.observableArray();
+
+	this.filterLocations = function(){
+		listObservable.removeAll();
+		locations.forEach(function(locItem){
+			var userText = document.getElementById('userInput').value;
+				if (locItem.name.toLowerCase().indexOf(userText.toLowerCase())==0){
+					this.listObservable.push(locItem);
+				}
+			});
+	}
+	this.addMarkers = function(){
+		for(items in listObservable()){
+			  var marker = new google.maps.Marker({
+			   	map: map,
+			    draggable: true,
+			    animation: google.maps.Animation.DROP,
+			    position: listObservable()[items].coor[0]
+			  });
+		}
+  	}
+  	filterLocations();
+
 }
 ko.applyBindings(myViewModel);
