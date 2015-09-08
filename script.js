@@ -49,13 +49,13 @@ var myViewModel = function(){
 			    position: location
 			  });
 			  attachWin(marker,message);
-		markers().push(marker);
+			markers().push(marker);
   	}
 
   	this.createMarkers = function(){
   		deleteMarkers();
   		for (items in listObservable()){
-  			addMarkers(listObservable()[items].coor[0],test[items]);
+  			addMarkers(listObservable()[items].coor[0],listObservable()[items].name);
   			//console.log(listObservable()[items].coor);
   		}
   		showMarkers();
@@ -88,7 +88,11 @@ var myViewModel = function(){
 	}
 
 	this.getInfo = function(){
-		infowindow.open(map, markers()[i]);
+		return("da")
+	}
+
+	this.receiveData = function(){
+
 	}
   	this.populateList();
 
