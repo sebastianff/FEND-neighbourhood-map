@@ -78,7 +78,7 @@ var myViewModel = function(){
 
 	this.attachWin = function(marker,message){
 		var infowindow = new google.maps.InfoWindow({
-    		content:message
+    		content:receiveData()
   		});
 
   		marker.addListener('click', function() {
@@ -92,7 +92,11 @@ var myViewModel = function(){
 	}
 
 	this.receiveData = function(){
-
+		url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=france&page=2&sort=oldest&api-key=231e8ef758feba7528cc7418f8c7e894:2:72283946";
+		$.getJSON(url,function(data){
+        	var da = data.response.docs[0].headline.main;
+        	return da;
+		})
 	}
   	this.populateList();
 
