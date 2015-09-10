@@ -64,17 +64,19 @@ var myViewModel = function(){
 		var infowindow = new google.maps.InfoWindow();
 
   		marker.addListener('click', function() {
-  			receiveData();
+  			receiveData(message);
   			setTimeout(function(){infowindow.setContent(dataReceived)},600);
     		infowindow.open(marker.get('map'), marker);
+    		console.log(marker)
 
   		});
 	}
 
-	this.receiveData = function(){
-		url = "http://api.nytimes.com/svc/search/v2/articlesearch.jssson?q=france&page=2&sort=oldest&api-key=231e8ef758feba7528cc7418f8c7e894:2:72283946";
+	this.receiveData = function(message){
+		url = "http://api.population.io:80/1.0/population/"+message+"/2015-12-24/";
 		$.getJSON(url,function(data){
-        	dataReceived = data.response.docs[0].headline.main;
+        	dataReceived = String(data.total_population.population);
+        	console.log(dataReceived);
 		}).error(function(){dataReceived="Request couldn't be completed"})
 	}
 
