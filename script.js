@@ -82,7 +82,7 @@ var myViewModel = function(){
   		marker.addListener('click', function() {
   			infowindow.close();
   			receiveData();
-  			infowindow.setContent(da);
+  			setTimeout(function(){infowindow.setContent(da)},600);
     		infowindow.open(marker.get('map'), marker);
 
   		});
