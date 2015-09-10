@@ -8,7 +8,6 @@
   </head>
   <body>
     <input id="userInput" data-bind="event:{keyup: filterLocations}"></input>
-    <button data-bind="click: createMarkers">Show on map</button>
     <ul data-bind="foreach:listObservable">
       <li data-bind="text: name"></li>
     </ul>
