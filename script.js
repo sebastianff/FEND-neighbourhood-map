@@ -27,10 +27,6 @@ var myViewModel = function(){
 		setTimeout(function(){createMarkers()},1000);
 	}
 
-	this.probam = function(){
-		console.log(this.name);
-	}
-
 	this.filterLocations = function(){
 		listObservable.removeAll();
 		locations.forEach(function(locItem){
@@ -82,6 +78,7 @@ var myViewModel = function(){
 		var infowindow = new google.maps.InfoWindow();
 
   		marker.addListener('click', function() {
+  			animation: google.maps.Animation.DROP,
   			receiveData(message);
   			setTimeout(function(){infowindow.setContent(dataReceived)},600);
     		infowindow.open(marker.get('map'), marker);
@@ -93,8 +90,9 @@ var myViewModel = function(){
 	this.receiveData = function(message){
 		url = "http://api.population.io:80/1.0/population/"+message+"/2015-12-24/";
 		$.getJSON(url,function(data){
+			var sentence = "Population of " + message + " is ";
         	dataReceived = String(data.total_population.population).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        	console.log(dataReceived);
+        	dataReceived = sentence + dataReceived;
 		}).error(function(){dataReceived="Request couldn't be completed"})
 	}
 
