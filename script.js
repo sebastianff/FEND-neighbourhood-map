@@ -77,13 +77,14 @@ var myViewModel = function(){
 	}
 
 	this.attachWin = function(marker,message){
-		var infowindow = new google.maps.InfoWindow({
-    		content:receiveData()
-  		});
+		var infowindow = new google.maps.InfoWindow();
 
   		marker.addListener('click', function() {
   			infowindow.close();
+  			receiveData();
+  			infowindow.setContent(da);
     		infowindow.open(marker.get('map'), marker);
+
   		});
 	}
 
@@ -94,8 +95,9 @@ var myViewModel = function(){
 	this.receiveData = function(){
 		url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=france&page=2&sort=oldest&api-key=231e8ef758feba7528cc7418f8c7e894:2:72283946";
 		$.getJSON(url,function(data){
-        	var da = data.response.docs[0].headline.main;
-        	return da;
+        	da = data.response.docs[0].headline.main;
+        	setTimeout(function(){return(da)},20000);
+        	//return(da);
 		})
 	}
   	this.populateList();
