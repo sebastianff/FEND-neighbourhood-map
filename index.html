@@ -9,7 +9,7 @@
   <body>
     <input id="userInput" data-bind="event:{keyup: filterLocations}"></input>
     <ul data-bind="foreach:listObservable">
-      <li data-bind="text: name"></li>
+      <li data-bind="text: name,click:clickLocations"></li>
     </ul>
     <div id="map">
 

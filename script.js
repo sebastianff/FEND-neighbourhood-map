@@ -24,7 +24,11 @@ var myViewModel = function(){
 		locations.forEach(function(locItem){
 			this.listObservable.push(locItem);
 		});
-		setTimeout(function(){createMarkers()},100);
+		setTimeout(function(){createMarkers()},1000);
+	}
+
+	this.probam = function(){
+		console.log(this.name);
 	}
 
 	this.filterLocations = function(){
@@ -33,6 +37,19 @@ var myViewModel = function(){
 			var userText = document.getElementById('userInput').value;
 				if (locItem.name.toLowerCase().indexOf(userText.toLowerCase())==0){
 					this.listObservable.push(locItem);
+				}
+		});
+		createMarkers();
+	}
+
+	this.clickLocations = function(){
+		listObservable.removeAll();
+		var nesto = this.name;
+		locations.forEach(function(locItem){
+			var userText = document.getElementById('userInput').value;
+				if (locItem.name.toLowerCase().indexOf(nesto.toLowerCase())==0){
+					this.listObservable.push(locItem);
+					console.log(nesto);
 				}
 		});
 		createMarkers();
