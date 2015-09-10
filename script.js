@@ -24,6 +24,7 @@ var myViewModel = function(){
 		locations.forEach(function(locItem){
 			this.listObservable.push(locItem);
 		});
+		setTimeout(function(){createMarkers()},100);
 	}
 
 	this.filterLocations = function(){
@@ -34,7 +35,17 @@ var myViewModel = function(){
 					this.listObservable.push(locItem);
 				}
 		});
+		createMarkers();
 	}
+
+	this.createMarkers = function(){
+  		setMapOnAll(null);
+  		markers.removeAll();
+  		for (items in listObservable()){
+  			addMarkers(listObservable()[items].coor[0],listObservable()[items].name);
+  		}
+  		setMapOnAll(map);
+  	}
 
 	this.addMarkers = function(location,message){
 	    var marker = new google.maps.Marker({
@@ -43,15 +54,6 @@ var myViewModel = function(){
 	  	});
 	    attachWin(marker,message);
 	    markers().push(marker);
-  	}
-
-  	this.createMarkers = function(){
-  		setMapOnAll(null);
-  		markers.removeAll();
-  		for (items in listObservable()){
-  			addMarkers(listObservable()[items].coor[0],listObservable()[items].name);
-  		}
-  		setMapOnAll(map);
   	}
 
   	this.setMapOnAll = function(map){
