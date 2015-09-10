@@ -10,12 +10,6 @@ var map;
 	initMap = function(){
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 43.281775, lng: 12.074211},
-			scrollwheel:false,
-			scaleControl:false,
-			navigationControl:false,
-			scrollwheelzoom:false,
-			zoomControl:false,
-			disableDoubleClickZoom: true,
     		zoom: 4
 		});
 	}
@@ -55,7 +49,7 @@ var myViewModel = function(){
 					setMapOnAll(null);
 					markers.removeAll();
 					console.log(nesto);
-					addMarkers(locItem.coor[0],"");
+					addMarkers(locItem.coor[0],locItem.name);
 					setMapOnAll(map);
 				}
 		});
