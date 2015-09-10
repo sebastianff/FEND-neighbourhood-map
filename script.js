@@ -10,6 +10,12 @@ var map;
 	initMap = function(){
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 43.281775, lng: 12.074211},
+			scrollwheel:false,
+			scaleControl:false,
+			navigationControl:false,
+			scrollwheelzoom:false,
+			zoomControl:false,
+			disableDoubleClickZoom: true,
     		zoom: 4
 		});
 	}
@@ -43,16 +49,16 @@ var myViewModel = function(){
 	}
 
 	this.clickLocations = function(){
-		listObservable.removeAll();
 		var nesto = this.name;
 		locations.forEach(function(locItem){
-			var userText = document.getElementById('userInput').value;
 				if (locItem.name.toLowerCase().indexOf(nesto.toLowerCase())==0){
-					this.listObservable.push(locItem);
+					setMapOnAll(null);
+					markers.removeAll();
 					console.log(nesto);
+					addMarkers(locItem.coor[0],"");
+					setMapOnAll(map);
 				}
 		});
-		createMarkers();
 	}
 
 	this.createMarkers = function(){
