@@ -7,10 +7,12 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <div id="nav">
     <input id="userInput" data-bind="event:{keyup: filterLocations}"></input>
     <ul data-bind="foreach:listObservable">
       <li data-bind="text: name,click:clickLocations"></li>
     </ul>
+    </div>
     <div id="map">
 
     </div>
