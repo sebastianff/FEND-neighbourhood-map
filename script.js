@@ -10,7 +10,7 @@ var map;
 	initMap = function(){
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 43.281775, lng: 12.074211},
-    		zoom: 4
+    		zoom: 3
 		});
 	}
 
@@ -43,12 +43,11 @@ var myViewModel = function(){
 	}
 
 	this.clickLocations = function(){
-		var nesto = this.name;
+		var clickedItem = this.name;
 		locations.forEach(function(locItem){
-				if (locItem.name.toLowerCase().indexOf(nesto.toLowerCase())==0){
+				if (locItem.name.toLowerCase().indexOf(clickedItem.toLowerCase())==0){
 					setMapOnAll(null);
 					markers.removeAll();
-					console.log(nesto);
 					addMarkers(locItem.coor[0],locItem.name);
 					setMapOnAll(map);
 				}
