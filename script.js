@@ -75,7 +75,7 @@ var myViewModel = function(){
 	this.receiveData = function(message){
 		url = "http://api.population.io:80/1.0/population/"+message+"/2015-12-24/";
 		$.getJSON(url,function(data){
-        	dataReceived = String(data.total_population.population);
+        	dataReceived = String(data.total_population.population).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         	console.log(dataReceived);
 		}).error(function(){dataReceived="Request couldn't be completed"})
 	}
