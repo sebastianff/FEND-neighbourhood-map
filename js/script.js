@@ -1,16 +1,19 @@
 var locations = [
-	{name:"France",coor:[{lat:48.998754, lng:230460}]},
+	{name:"France",coor:[{lat:48.998754, lng:23.04600}]},
 	{name:"Italy",coor:[{lat:43.281775, lng:12.074211}]},
 	{name:"United Kingdom",coor:[{lat:51.510795, lng:-0.105520}]},
-	{name:"Belgium",coor:[{lat:50.515523, lng:4.816355}]}//This is the list of all the locations we use.
-]
+	{name:"Belgium",coor:[{lat:50.515523, lng:4.816355}]},
+	{name:"Serbia",coor:[{lat:44.867888, lng:20.426739}]},
+	{name:"Spain",coor:[{lat:40.426406, lng:-3.699224}]},
+	{name:"Greece",coor:[{lat:37.919440, lng:23.708987}]}//This is the list of all the locations we use.
+];
 
 var map;
 
 	initMap = function(){
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 43.281775, lng: 12.074211},
-    		zoom: 3
+    		zoom: 5
 		});
 	}
 
@@ -90,7 +93,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	this.receiveData = function(message){//This function makes the AJAX call for each marker when clicked
 		url = "http://api.population.io:80/1.0/population/"+message+"/2015-12-24/";
 		$.getJSON(url,function(data){
-			var sentence = "Population of " + message + " is ";
+			var sentence = "<p>Population of <strong>" + message + "</strong> is </p>";
         	dataReceived = String(data.total_population.population).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         	dataReceived = sentence + dataReceived;
 		}).error(function(){dataReceived="Request couldn't be completed"})
