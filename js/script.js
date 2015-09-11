@@ -1,7 +1,6 @@
 var locations = [
 	{name:"France",coor:[{lat:48.998754, lng:23.04600}]},
 	{name:"Italy",coor:[{lat:43.281775, lng:12.074211}]},
-	{name:"England",coor:[{lat:51.510795, lng:-0.105520}]},
 	{name:"Belgium",coor:[{lat:50.515523, lng:4.816355}]},
 	{name:"Serbia",coor:[{lat:44.867888, lng:20.426739}]},
 	{name:"Spain",coor:[{lat:40.426406, lng:-3.699224}]},
