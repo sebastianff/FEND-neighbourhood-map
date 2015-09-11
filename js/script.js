@@ -1,7 +1,7 @@
 var locations = [
 	{name:"France",coor:[{lat:48.998754, lng:23.04600}]},
 	{name:"Italy",coor:[{lat:43.281775, lng:12.074211}]},
-	{name:"United Kingdom",coor:[{lat:51.510795, lng:-0.105520}]},
+	{name:"England",coor:[{lat:51.510795, lng:-0.105520}]},
 	{name:"Belgium",coor:[{lat:50.515523, lng:4.816355}]},
 	{name:"Serbia",coor:[{lat:44.867888, lng:20.426739}]},
 	{name:"Spain",coor:[{lat:40.426406, lng:-3.699224}]},
@@ -23,7 +23,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
 	this.listObservable = ko.observableArray();//This array will hold the data for the markers we are displaying
 
-	this.populateList = function(){//This function populates the inital list and ads the inistal markers to the map
+	this.populateList = function(){//This function populates the inital list and ads the initial markers to the map
 		locations.forEach(function(locItem){
 			this.listObservable.push(locItem);
 		});
@@ -77,8 +77,10 @@ var myViewModel = function(){//A viewModel used for knockout.js
   		}
 	}
 
-	this.toggleBounce = function(){
-
+	this.noAnimation = function(){
+  		for (var i = 0; i < markers().length; i++) {
+    		markers()[i].setAnimation(null);//Set the map on markers to make them visible
+  		}
 	}
 
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
@@ -86,11 +88,12 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
   		marker.addListener('click', function() {
   			animation: google.maps.Animation.BOUNCE,
-  			receiveData(message);
+  			receiveData(message);//send the location name for the AJAX request
   			if (marker.getAnimation() !== null) {
     			marker.setAnimation(null);
   				} else {
-    				marker.setAnimation(google.maps.Animation.BOUNCE);
+  					noAnimation();
+    				marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
   				}
   			setTimeout(function(){infowindow.setContent(dataReceived)},600);
     		infowindow.open(marker.get('map'), marker);
@@ -102,7 +105,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	this.receiveData = function(message){//This function makes the AJAX call for each marker when clicked
 		url = "http://api.population.io:80/1.0/population/"+message+"/2015-12-24/";
 		$.getJSON(url,function(data){
-			var sentence = "<p>Population of <strong>" + message + "</strong> is </p>";
+			var sentence = "<p class='infowin'>Population of " + message + " is </p>";
         	dataReceived = String(data.total_population.population).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         	dataReceived = sentence + dataReceived;
 		}).error(function(){dataReceived="Request couldn't be completed"})

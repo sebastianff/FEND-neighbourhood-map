@@ -8,38 +8,6 @@ html, body {
       }
 #nav{
 	z-index:100;
-  color:white;
-  font:20px sans-serif;
-  margin:0px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
 }
 
-#nav li {
-  list-style: none;
-  border:1px solid black;
-  background-color: grey;
-  width: 200px;
-  margin: 0px;
-  padding: 3px;
-}
 
-#nav li:hover{
-  background-color:green;
-}
-
-#nav ul{
-  float:right;
-  clear: both;
-}
-
-#nav input{
-  width: 200px;
-  height: 30px;
-  border-radius: 2px solid grey;
-  box-shadow: 5px grey;
-  float: right;
-  clear: both
-}

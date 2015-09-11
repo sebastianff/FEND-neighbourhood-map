@@ -3,43 +3,62 @@ html, body {
         margin: 0;
         padding: 0;
       }
-      #map {
-        height: 100%;
-      }
-#nav{
-	z-index:100;
-  color:white;
-  font:20px sans-serif;
-  margin:0px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 33%;
+
+#map {
+  height: 100%;
+  width: 85%;
+  float: left;
 }
 
-#nav li {
+#nav{
+	z-index:100;
+  position: fixed;
+  right: 0px;
+  height: auto;
+  width: 17%;
+}
+
+#nav li{
+  text-align: center;
+  width: 100%;
   list-style: none;
-  border:1px solid black;
-  background-color: grey;
-  width: 200px;
-  margin: 0px;
-  padding: 3px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  padding: 4px;
+  border-bottom: 3px solid grey;
 }
 
 #nav li:hover{
-  background-color:green;
+  background-color: grey;
 }
 
-#nav ul{
-  float:right;
-  clear: both;
-}
-
-#nav input{
-  width: 200px;
+input{
+  position: fixed;
+  left: 0px;
+  z-index: 100;
+  font-size:12px;
   height: 30px;
-  border-radius: 2px solid grey;
-  box-shadow: 5px grey;
-  float: right;
-  clear: both
+  width: 20%;
+}
+
+.infowin{
+  font-size: 15px;
+  font-family: Roboto;
+}
+
+input[type="text"]{
+  font-size: 22px;
+  font-family: Roboto;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 700px) {
+#nav li {
+    font-size: 12px;
+  }
+input[type="text"]{
+  font-size: 12px;
+  font-family: Roboto;
+  font-weight: bold;
+  }
 }
