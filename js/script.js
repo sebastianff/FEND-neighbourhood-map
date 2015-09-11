@@ -13,7 +13,7 @@ var map;
 	initMap = function(){
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 43.281775, lng: 12.074211},
-    		zoom: 5
+    		zoom: 3
 		});
 	}
 
@@ -77,12 +77,21 @@ var myViewModel = function(){//A viewModel used for knockout.js
   		}
 	}
 
+	this.toggleBounce = function(){
+
+	}
+
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
 		var infowindow = new google.maps.InfoWindow();
 
   		marker.addListener('click', function() {
-  			animation: google.maps.Animation.DROP,
+  			animation: google.maps.Animation.BOUNCE,
   			receiveData(message);
+  			if (marker.getAnimation() !== null) {
+    			marker.setAnimation(null);
+  				} else {
+    				marker.setAnimation(google.maps.Animation.BOUNCE);
+  				}
   			setTimeout(function(){infowindow.setContent(dataReceived)},600);
     		infowindow.open(marker.get('map'), marker);
     		console.log(marker)
