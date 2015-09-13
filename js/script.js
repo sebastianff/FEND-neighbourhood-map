@@ -32,8 +32,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	this.filterLocations = function(){//This function filter the listobservable array based on user search queries
 		listObservable.removeAll();
 		locations.forEach(function(locItem){
-			var userText = document.getElementById('userInput').value;
-				if (locItem.name.toLowerCase().indexOf(userText.toLowerCase())==0){
+				if (locItem.name.toLowerCase().indexOf(userInput.toLowerCase())==0){
 					this.listObservable.push(locItem);
 				}
 		});
