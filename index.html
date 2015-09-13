@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <input type="text"id="userInput" data-bind="event:{keyup: filterLocations}"></input>
+    <input type="text"id="userInput" data-bind="textInput:userInput,event:{keyup: filterLocations}"></input>
     <div id="nav">
           <ul data-bind="foreach:listObservable">
           <li data-bind="text: name,click:clickLocations"></li>
