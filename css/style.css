@@ -19,7 +19,7 @@ body {
   width: 17%;
 }
 
-#nav li{
+#listItem{
   text-align: center;
   width: 100%;
   list-style: none;
@@ -29,7 +29,7 @@ body {
   border-bottom: 3px solid grey;
 }
 
-#nav li:hover{
+#listItem:hover{
   background-color: grey;
 }
 
@@ -54,12 +54,14 @@ input[type="text"]{
 }
 
 @media screen and (max-width: 700px) {
-#nav li {
+
+  #listItem {
+      font-size: 12px;
+    }
+
+  input[type="text"]{
     font-size: 12px;
-  }
-input[type="text"]{
-  font-size: 12px;
-  font-family: Roboto;
-  font-weight: bold;
-  }
+    font-family: Roboto;
+    font-weight: bold;
+    }
 }
