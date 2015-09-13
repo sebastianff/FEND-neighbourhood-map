@@ -2,28 +2,23 @@
 <html>
   <head>
     <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <input type="text"id="userInput" value=" "data-bind="textInput:userInput,event:{keyup: filterLocations}"></input>
+    <input type="text" id="userInput" data-bind="textInput:userInput,event:{keyup: filterLocations}">
     <div id="nav">
           <ul data-bind="foreach:listObservable">
           <li data-bind="text: name,click:clickLocations"></li>
         </ul>
     </div>
-
     <div id="map">
     </div>
     <script src="js/knockout.js"></script>
     <script src="js/jquery.js"></script>
-
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        ></script>
-        <script src="js/script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
