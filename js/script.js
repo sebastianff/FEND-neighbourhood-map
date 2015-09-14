@@ -41,7 +41,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 					this.listObservable.push(locations[i]);
 					markers()[i].setMap(map);
 
-				}
+				};
 		};
 	};
 
@@ -59,7 +59,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
   		setMapOnAll(null);
   		for (var i=0;i<listObservable().length;i++){
   			addMarkers(listObservable()[i].coor[0],listObservable()[i].name);
-  		}
+  		};
   		setMapOnAll(map);
   	};
 
@@ -77,7 +77,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
   	this.setMapOnAll = function(map){
   		for (var i = 0; i < markers().length; i++) {
     		markers()[i].setMap(map);//Set the map on markers to make them visible
-  		}
+  		};
 	};
 
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
@@ -88,7 +88,6 @@ var myViewModel = function(){//A viewModel used for knockout.js
 		marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
 		setTimeout(function(){infowindow.setContent(dataReceived)},300);
 		infowindow.open(marker.get('map'), marker);
-		console.log(marker)
 	};
 
 	this.receiveData = function(message){//This function makes the AJAX call for each marker when clicked
