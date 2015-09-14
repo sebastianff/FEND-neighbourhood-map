@@ -82,7 +82,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
 		var infowindow = new google.maps.InfoWindow();
 		receiveData(message);//send the location name for the AJAX request
-		setTimeout(function(){marker.setAnimation(null)},1600);
+		setTimeout(function(){marker.setAnimation(null)},1400);
 		marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
 		setTimeout(function(){infowindow.setContent(dataReceived)},600);
 		infowindow.open(marker.get('map'), marker);
