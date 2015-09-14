@@ -22,6 +22,8 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
 	this.listObservable = ko.observableArray();//This array will hold the data for the markers we are displaying
 
+	this.userInput = ko.observable();
+
 	this.populateList = function(){//This function populates the inital list and ads the initial markers to the map
 		locations.forEach(function(locItem){
 			this.listObservable.push(locItem);
@@ -32,12 +34,14 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	this.filterLocations = function(){//This function filter the listobservable array based on user search queries
 		listObservable.removeAll();
 		setMapOnAll(null);
-		locations.forEach(function(locItem){
-				if (locItem.name.toLowerCase().indexOf(userInput.toLowerCase())===0){
-					this.listObservable.push(locItem);
+		for (items in locations){
+				if (locations[items].name.toLowerCase().indexOf(userInput().toLowerCase())===0){
+					this.listObservable.push(locations[items]);
+					markers()[items].setMap(map);
+
 				}
-		});
-		createMarkers();//We call the create markers function to create the filtered markers
+		};
+		//createMarkers();//We call the create markers function to create the filtered markers
 	};
 
 	this.clickLocations = function(){//This function displays the clicker marker from the list
