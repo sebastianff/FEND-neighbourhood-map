@@ -84,7 +84,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 		receiveData(message);//send the location name for the AJAX request
 		setTimeout(function(){marker.setAnimation(null)},1400);
 		marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
-		setTimeout(function(){infowindow.setContent(dataReceived)},600);
+		infowindow.setContent(dataReceived);
 		infowindow.open(marker.get('map'), marker);
 		console.log(marker)
 	};
