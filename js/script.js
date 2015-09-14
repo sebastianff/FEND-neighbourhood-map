@@ -1,10 +1,10 @@
 var locations = [
-	{name:"France",coor:[{lat:48.998754, lng:23.04600}]},
-	{name:"Italy",coor:[{lat:43.281775, lng:12.074211}]},
-	{name:"Belgium",coor:[{lat:50.515523, lng:4.816355}]},
-	{name:"Serbia",coor:[{lat:44.867888, lng:20.426739}]},
-	{name:"Spain",coor:[{lat:40.426406, lng:-3.699224}]},
-	{name:"Greece",coor:[{lat:37.919440, lng:23.708987}]}//This is the list of all the locations we use.
+	{name:"France",coor:[{lat:48.998754, lng:23.04600}],marker:""},
+	{name:"Italy",coor:[{lat:43.281775, lng:12.074211}],marker:""},
+	{name:"Belgium",coor:[{lat:50.515523, lng:4.816355}],marker:""},
+	{name:"Serbia",coor:[{lat:44.867888, lng:20.426739}],marker:""},
+	{name:"Spain",coor:[{lat:40.426406, lng:-3.699224}],marker:""},
+	{name:"Greece",coor:[{lat:37.919440, lng:23.708987}],marker:""}//This is the list of all the locations we use.
 ];
 
 var map;
@@ -41,14 +41,13 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
 	this.clickLocations = function(){//This function displays the clicker marker from the list
 		var clickedItem = this.name;
-		locations.forEach(function(locItem){
-				if (locItem.name.toLowerCase().indexOf(clickedItem.toLowerCase())===0){
+		for(items in locations){
+				if (locations[items].name.toLowerCase().indexOf(clickedItem.toLowerCase())===0){
 					setMapOnAll(null);
-					markers.removeAll();
-					addMarkers(locItem.coor[0],locItem.name);
-					setMapOnAll(map);
+					markers()[items].setMap(map);
+					}
 				}
-		});
+		attachWin();
 	}
 
 	this.createMarkers = function(){//This fucntion is called from other functions to create the markers
