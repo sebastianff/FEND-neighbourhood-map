@@ -31,6 +31,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
 	this.filterLocations = function(){//This function filter the listobservable array based on user search queries
 		listObservable.removeAll();
+		setMapOnAll(null);
 		locations.forEach(function(locItem){
 				if (locItem.name.toLowerCase().indexOf(userInput.toLowerCase())===0){
 					this.listObservable.push(locItem);
@@ -44,14 +45,10 @@ var myViewModel = function(){//A viewModel used for knockout.js
 		for(items in locations){
 				if (locations[items].name.toLowerCase().indexOf(clickedItem.toLowerCase())===0){
 					setMapOnAll(null);
-					receiveData(locations[items].name);
-					var infowindow = new google.maps.InfoWindow();
-					setTimeout(function(){infowindow.setContent(dataReceived)},600);
 					markers()[items].setMap(map);
-					infowindow.open(markers()[items].get('map'), markers()[items]);
-					}
+					attachWin(markers()[items],locations[items].name)
 				}
-		attachWin();
+		}
 	}
 
 	this.createMarkers = function(){//This fucntion is called from other functions to create the markers
@@ -68,7 +65,6 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	    	animation: google.maps.Animation.DROP,
 	    	position: location
 	  	});
-	    attachWin(marker,message);
 	    markers().push(marker);
   	};
 
@@ -86,20 +82,16 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
 		var infowindow = new google.maps.InfoWindow();
-
-  		marker.addListener('click', function() {
-  			receiveData(message);//send the location name for the AJAX request
-  			if (marker.getAnimation() !== null) {
-    			marker.setAnimation(null);
-  				} else {
-  					noAnimation();
-    				marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
-  				}
-  			setTimeout(function(){infowindow.setContent(dataReceived)},600);
-    		infowindow.open(marker.get('map'), marker);
-    		console.log(marker)
-
-  		});
+		receiveData(message);//send the location name for the AJAX request
+		if (marker.getAnimation() !== null) {
+		marker.setAnimation(null);
+			} else {
+				noAnimation();
+			marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
+			}
+		setTimeout(function(){infowindow.setContent(dataReceived)},600);
+		infowindow.open(marker.get('map'), marker);
+		console.log(marker)
 	};
 
 	this.receiveData = function(message){//This function makes the AJAX call for each marker when clicked
