@@ -44,7 +44,11 @@ var myViewModel = function(){//A viewModel used for knockout.js
 		for(items in locations){
 				if (locations[items].name.toLowerCase().indexOf(clickedItem.toLowerCase())===0){
 					setMapOnAll(null);
+					receiveData(locations[items].name);
+					var infowindow = new google.maps.InfoWindow();
+					setTimeout(function(){infowindow.setContent(dataReceived)},600);
 					markers()[items].setMap(map);
+					infowindow.open(markers()[items].get('map'), markers()[items]);
 					}
 				}
 		attachWin();
