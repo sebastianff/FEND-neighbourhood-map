@@ -65,12 +65,21 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	    	animation: google.maps.Animation.DROP,
 	    	position: location
 	  	});
+	  	marker.addListener('click',function(){
+	  		attachWin(marker,message);
+	  	})
 	    markers().push(marker);
   	};
 
   	this.setMapOnAll = function(map){
   		for (var i = 0; i < markers().length; i++) {
     		markers()[i].setMap(map);//Set the map on markers to make them visible
+  		}
+	};
+
+	this.closeAllWin = function(map){
+  		for (var i = 0; i < markers().length; i++) {
+    		infowindow.close(markers()[i]);//Set the map on markers to make them visible
   		}
 	};
 
@@ -83,12 +92,9 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
 		var infowindow = new google.maps.InfoWindow();
 		receiveData(message);//send the location name for the AJAX request
-		if (marker.getAnimation() !== null) {
-		marker.setAnimation(null);
-			} else {
-				noAnimation();
-			marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
-			}
+		setTimeout(function(){marker.setAnimation(null)},1600);
+		noAnimation();
+		marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
 		setTimeout(function(){infowindow.setContent(dataReceived)},600);
 		infowindow.open(marker.get('map'), marker);
 		console.log(marker)
