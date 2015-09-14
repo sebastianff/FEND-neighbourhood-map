@@ -34,32 +34,30 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	this.filterLocations = function(){//This function filter the listobservable array based on user search queries
 		listObservable.removeAll();
 		setMapOnAll(null);
-		for (items in locations){
-				if (locations[items].name.toLowerCase().indexOf(userInput().toLowerCase())===0){
-					this.listObservable.push(locations[items]);
-					markers()[items].setMap(map);
+		for (var i=0;i<locations.length;i++){
+				if (locations[i].name.toLowerCase().indexOf(userInput().toLowerCase())===0){
+					this.listObservable.push(locations[i]);
+					markers()[i].setMap(map);
 
 				}
 		};
-		//createMarkers();//We call the create markers function to create the filtered markers
 	};
 
 	this.clickLocations = function(){//This function displays the clicker marker from the list
 		var clickedItem = this.name;
-		for(items in locations){
-				if (locations[items].name.toLowerCase().indexOf(clickedItem.toLowerCase())===0){
-					setMapOnAll(null);
-					markers()[items].setMap(map);
-					attachWin(markers()[items],locations[items].name)
-				}
-		}
-	}
+		for(var i=0;i<locations.length;i++){
+				if (locations[i].name.toLowerCase().indexOf(clickedItem.toLowerCase())===0){
+					markers()[i].setMap(map);
+					attachWin(markers()[i],locations[i].name)
+				};
+		};
+	};
 
 	this.createMarkers = function(){//This fucntion is called from other functions to create the markers
   		setMapOnAll(null);
   		markers.removeAll();
-  		for (items in listObservable()){
-  			addMarkers(listObservable()[items].coor[0],listObservable()[items].name);
+  		for (var i=0;i<listObservable().length;i++){
+  			addMarkers(listObservable()[i].coor[0],listObservable()[i].name);
   		}
   		setMapOnAll(map);
   	};
@@ -81,23 +79,10 @@ var myViewModel = function(){//A viewModel used for knockout.js
   		}
 	};
 
-	this.closeAllWin = function(map){
-  		for (var i = 0; i < markers().length; i++) {
-    		infowindow.close(markers()[i]);//Set the map on markers to make them visible
-  		}
-	};
-
-	this.noAnimation = function(){
-  		for (var i = 0; i < markers().length; i++) {
-    		markers()[i].setAnimation(null);//Set the map on markers to make them visible
-  		}
-	};
-
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
 		var infowindow = new google.maps.InfoWindow();
 		receiveData(message);//send the location name for the AJAX request
 		setTimeout(function(){marker.setAnimation(null)},1600);
-		noAnimation();
 		marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
 		setTimeout(function(){infowindow.setContent(dataReceived)},600);
 		infowindow.open(marker.get('map'), marker);
