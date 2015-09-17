@@ -93,11 +93,25 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
 	this.receiveData = function(message){//This function makes the AJAX call for each marker when clicked
 		url = "http://api.population.io:80/1.0/population/"+message+"/2015-12-24/";
-		$.getJSON(url,function(data){
-			var sentence = "<p class='infowin'>Population of " + message + " is </p>";
-        	dataReceived = String(data.total_population.population).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        	dataReceived = sentence + dataReceived;
-		}).error(function(){dataReceived="Request couldn't be completed";});
+		$.ajax({
+			type:'GET',
+			url:url,
+			contentType: 'text/plain',
+			xhrFields:{
+				withCredentials: false
+			},
+			headers:{
+
+			},
+			success:function(data){
+				var sentence = "<p class='infowin'>Population of " + message + " is </p>";
+        		dataReceived = String(data.total_population.population).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        		dataReceived = sentence + dataReceived;
+        		},
+        	error:function(){
+        		dataReceived="Request couldn't be completed";
+        	}
+        });
 	};
 
   	this.populateList();//Call to the function to initaly populate the list
