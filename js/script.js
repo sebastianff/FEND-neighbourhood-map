@@ -13,7 +13,7 @@ var initMap = function(){
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 43.281775, lng: 12.074211},
 		zoom: 3
-	});
+	});//this is the inital callback function for the map
 };
 
 var myViewModel = function(){//A viewModel used for knockout.js
@@ -22,7 +22,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 
 	this.listObservable = ko.observableArray();//This array will hold the data for the markers we are displaying
 
-	this.userInput = ko.observable();
+	this.userInput = ko.observable();//this variable holds the user search info
 
 	this.infowindows = ko.observableArray();
 
@@ -33,7 +33,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 		setTimeout(function(){createMarkers();infowindow = new google.maps.InfoWindow();},1000);
 	};
 
-	this.filterLocations = function(){//This function filter the listobservable array based on user search queries
+	this.filterLocations = function(){//This function filters the listobservable array based on user search queries
 		infowindow.close();
 		listObservable.removeAll();
 		setMapOnAll(null);
