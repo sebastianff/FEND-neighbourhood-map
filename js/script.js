@@ -56,7 +56,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 		}
 	};
 
-	this.createMarkers = function(){//This fucntion is called from other functions to create the markers
+	this.createMarkers = function(){//This function is called from other functions to create the markers
   		setMapOnAll(null);
   		for (var i=0;i<listObservable().length;i++){
   			addMarkers(listObservable()[i].coor[0],listObservable()[i].name);
@@ -64,7 +64,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
   		setMapOnAll(map);
   	};
 
-	this.addMarkers = function(location,message){//This fucntion created the basic marker to be used in other fucntions
+	this.addMarkers = function(location,message){//This function created the basic marker to be used in other fucntions
 	    var marker = new google.maps.Marker({
 	    	animation: google.maps.Animation.DROP,
 	    	position: location
