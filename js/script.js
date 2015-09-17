@@ -7,9 +7,9 @@ var locations = [
 	{name:"Greece",coor:[{lat:37.919440, lng:23.708987}]}//This is the list of all the locations we use.
 ];
 
-var map;
+var map,google,ko,infowindow,listObservable,createMarkers,setMapOnAll,markers,userInput,attachWin,addMarkers,receiveData,dataReceived,url,$;
 
-initMap = function(){
+var initMap = function(){
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 43.281775, lng: 12.074211},
 		zoom: 3
@@ -34,6 +34,7 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	};
 
 	this.filterLocations = function(){//This function filter the listobservable array based on user search queries
+		infowindow.close();
 		listObservable.removeAll();
 		setMapOnAll(null);
 		for (var i=0;i<locations.length;i++){
@@ -41,8 +42,8 @@ var myViewModel = function(){//A viewModel used for knockout.js
 					this.listObservable.push(locations[i]);
 					markers()[i].setMap(map);
 
-				};
-		};
+				}
+		}
 	};
 
 	this.clickLocations = function(){//This function displays the clicker marker from the list
@@ -50,16 +51,16 @@ var myViewModel = function(){//A viewModel used for knockout.js
 		for(var i=0;i<locations.length;i++){
 				if (locations[i].name.toLowerCase().indexOf(clickedItem.toLowerCase())===0){
 					markers()[i].setMap(map);
-					attachWin(markers()[i],locations[i].name)
-				};
-		};
+					attachWin(markers()[i],locations[i].name);
+				}
+		}
 	};
 
 	this.createMarkers = function(){//This fucntion is called from other functions to create the markers
   		setMapOnAll(null);
   		for (var i=0;i<listObservable().length;i++){
   			addMarkers(listObservable()[i].coor[0],listObservable()[i].name);
-  		};
+  		}
   		setMapOnAll(map);
   	};
 
@@ -70,23 +71,23 @@ var myViewModel = function(){//A viewModel used for knockout.js
 	  	});
 	  	marker.addListener('click',function(){
 	  		attachWin(marker,message);
-	  	})
+	  	});
 	    markers().push(marker);
   	};
 
   	this.setMapOnAll = function(map){
   		for (var i = 0; i < markers().length; i++) {
     		markers()[i].setMap(map);//Set the map on markers to make them visible
-  		};
+  		}
 	};
 
 	this.attachWin = function(marker,message){//Function used to add the infoWindow to the markers
 		infowindow.close();
 		infowindow = new google.maps.InfoWindow();
 		receiveData(message);//send the location name for the AJAX request
-		setTimeout(function(){marker.setAnimation(null)},1400);
+		setTimeout(function(){marker.setAnimation(null);},1400);
 		marker.setAnimation(google.maps.Animation.BOUNCE);//ads the animation when marker clicked
-		setTimeout(function(){infowindow.setContent(dataReceived)},300);
+		setTimeout(function(){infowindow.setContent(dataReceived);},300);
 		infowindow.open(marker.get('map'), marker);
 	};
 
@@ -96,10 +97,10 @@ var myViewModel = function(){//A viewModel used for knockout.js
 			var sentence = "<p class='infowin'>Population of " + message + " is </p>";
         	dataReceived = String(data.total_population.population).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         	dataReceived = sentence + dataReceived;
-		}).error(function(){dataReceived="Request couldn't be completed";})
+		}).error(function(){dataReceived="Request couldn't be completed";});
 	};
 
   	this.populateList();//Call to the function to initaly populate the list
 
-}
+};
 ko.applyBindings(myViewModel);
