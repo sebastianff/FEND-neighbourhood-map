@@ -9,9 +9,9 @@
   </head>
   <body>
     <input type="text" id="userInput" data-bind="textInput:userInput,event:{keyup: filterLocations}">
-    <div id="nav">
-          <ul id="mainList" data-bind="foreach:listObservable">
-          <li id="listItem" data-bind="text: name,click:clickLocations"></li>
+    <div class="nav">
+          <ul class="mainList" data-bind="foreach:listObservable">
+          <li class="listItem" data-bind="text: name,click:clickLocations"></li>
         </ul>
     </div>
     <div id="map">
