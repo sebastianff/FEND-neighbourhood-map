@@ -1,6 +1,6 @@
-App name: Global population
-Url:http://sebastianff.github.io/frontend-nanodegree-neighbourhood-map/
-Author:Sebastian Farago
+App name: Global population</br>
+Url:http://sebastianff.github.io/frontend-nanodegree-neighbourhood-map/</br>
+Author:Sebastian Farago</br>
 
 The app is started by running index.html in your Browser.</br>
 The list of available countries is on the right.</br>
