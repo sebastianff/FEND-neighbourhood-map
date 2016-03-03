@@ -1,5 +1,5 @@
 App name: Global population</br>
-Url:http://sebastianff.github.io/frontend-nanodegree-neighbourhood-map/</br>
+Url:http://sebastianff.github.io/FEND-neighbourhood-map</br>
 Author:Sebastian Farago</br>
 
 The app is started by running index.html in your Browser.</br>
